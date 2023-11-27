@@ -1,0 +1,38 @@
+TAMANHO_DA_TABELA = 1000  // Tamanho arbitrário da tabela
+
+funcaoEspalhamento(chave):
+    // Implemente uma função de espalhamento adequada para suas chaves
+    // Pode ser algo simples como somar os valores ASCII dos caracteres na chave
+    soma = 0
+    para cada caractere c em chave:
+        soma += valorASCII(c)
+    retorno soma % TAMANHO_DA_TABELA
+
+classeTabelaEspalhamento:
+    tabela = novaListaDeListas(TAMANHO_DA_TABELA)  // Inicializa uma lista de listas
+
+    funcaoInserir(chave, valor):
+        indice = funcaoEspalhamento(chave)
+        listaNoIndice = tabela[indice]
+
+        // Verifica se a chave já existe na lista
+        para cada parChaveValor em listaNoIndice:
+            se parChaveValor[0] == chave:
+                // Atualiza o valor se a chave já existir
+                parChaveValor[1] = valor
+                retorno
+
+        // Adiciona a chave-valor à lista se a chave não existir
+        listaNoIndice.adicionar([chave, valor])
+
+    funcaoBuscar(chave):
+        indice = funcaoEspalhamento(chave)
+        listaNoIndice = tabela[indice]
+
+        // Procura a chave na lista
+        para cada parChaveValor em listaNoIndice:
+            se parChaveValor[0] == chave:
+                retorno parChaveValor[1]
+
+        // Retorna um valor padrão se a chave não for encontrada
+        retorno null
